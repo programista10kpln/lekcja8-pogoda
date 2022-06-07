@@ -1,16 +1,26 @@
-# This is a sample Python script.
+import os
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import requests
+from dotenv import load_dotenv
+from flask import Flask, render_template
+
+load_dotenv('venv/.env')
+
+app = Flask(__name__)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+@app.route('/', methods=['GET'])
+def get_weather():
+    url = "https://api.openweathermap.org/data/2.5/forecast"
+
+    querystring = {"lat": "54.3520500", "lon": "18.6463700", "units": "metric", "lang": "pl",
+                   "appid": os.getenv('api_key')}
+    response = requests.request("GET", url, params=querystring)
+
+    city = response.json()['city']
+    forecast = response.json()['list']
+    return render_template("main.html", city=city, forecast=forecast)
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if __name__ == "__main__":
+    app.run()
