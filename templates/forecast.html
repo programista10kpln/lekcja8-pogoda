@@ -40,7 +40,7 @@
       <main>
         <article>
           <section>
-            <div class="flex">
+            <div class="grid-rows-8">
               <div class="title"><h3>Data i czas</h3></div>
               <div class="title"><h3>Pogoda</h3></div>
               <div class="title"><h3>Temperatura</h3></div>
@@ -53,12 +53,12 @@
           </section>
           {% for i in forecast %}
           <section>
-            <div class="flex">
+            <div class="grid-rows-8">
               <div class="attr">{{i['dt_txt']}}</div>
               <div class="attr">
                 <p>
                   <img
-                    src="{{ url_for('static', filename = 'img/'+i['weather'][0]['icon']+'.png') }}"
+                    src="{{ url_for('static', filename = './img/'+i['weather'][0]['icon']+'.png') }}"
                     alt="weather-icon"
                   />
                 </p>

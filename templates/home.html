@@ -34,19 +34,28 @@
   <body>
     <div id="content">
       <header>
-        <h1>Podaj miasto</h1>
+        <h1>Podaj miejscowość</h1>
       </header>
       <main>
         <form action="forecast" method="post">
+          <img
+            src="{{url_for('static', filename='./img/skyline.png')}}"
+            alt="skyline"
+          />
           <input
             type="text"
             name="city_name"
             id="city_name"
             placeholder="np. Gdańsk"
+            autocomplete="off"
             onforminput="this.toggleAttribute('placeholder', '')"
             required
           />
-          <input type="submit" value="Sprawdź" onmouseover="this.style.cursor='pointer'"/>
+          <input
+            type="submit"
+            value="Sprawdź"
+            onmouseover="this.style.cursor='pointer'"
+          />
         </form>
       </main>
     </div>
