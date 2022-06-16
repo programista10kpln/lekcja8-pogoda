@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='./css/main.css')}}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{{url_for('static', filename='./favicon/apple-touch-icon.png')}}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{{url_for('static', filename='./favicon/favicon-32x32.png')}}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="{{url_for('static', filename='./favicon/favicon-16x16.png')}}"
+    />
+    <link
+      rel="manifest"
+      href="{{url_for('static', filename='./favicon/site.webmanifest')}}"
+    />
+    <title>Pogoda - {{city['name']}}</title>
+  </head>
+  <body>
+    <div id="content">
+      <header>
+        <h1>{{input_city}}</h1>
+        <p>Współrzędne: {{city['coord']['lat']}}, {{city['coord']['lon']}}</p>
+      </header>
+      <main>
+        <article>
+          <section>
+            <div class="flex">
+              <div class="title"><h3>Data i czas</h3></div>
+              <div class="title"><h3>Pogoda</h3></div>
+              <div class="title"><h3>Temperatura</h3></div>
+              <div class="title"><h3>Temperatura odczuwalna</h3></div>
+              <div class="title"><h3>Ciśnienie</h3></div>
+              <div class="title"><h3>Wilgotność</h3></div>
+              <div class="title"><h3>Zachmurzenie</h3></div>
+              <div class="title"><h3>Wiatr</h3></div>
+            </div>
+          </section>
+          {% for i in forecast %}
+          <section>
+            <div class="flex">
+              <div class="attr">{{i['dt_txt']}}</div>
+              <div class="attr">
+                <p>
+                  <img
+                    src="{{ url_for('static', filename = 'img/'+i['weather'][0]['icon']+'.png') }}"
+                    alt="weather-icon"
+                  />
+                </p>
+                <p>{{i['weather'][0]['description']}}</p>
+              </div>
+              <div class="attr">{{i['main']['temp']|round|int}} &#8451;</div>
+              <div class="attr">
+                {{i['main']['feels_like']|round|int}} &#8451;
+              </div>
+              <div class="attr">{{i['main']['pressure']}} hPa</div>
+              <div class="attr">{{i['main']['humidity']}}%</div>
+              <div class="attr">{{i['clouds']['all']}}%</div>
+              <div class="attr">{{i['wind']['speed']}} m/s</div>
+            </div>
+          </section>
+          {% endfor %}
+        </article>
+      </main>
+    </div>
+  </body>
+</html>

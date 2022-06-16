@@ -1,4 +1,4 @@
-* {
+*, *::before, *::after {
     box-sizing: border-box;
     text-align: center;
 }
@@ -18,7 +18,7 @@ html {
 h1 {
     font-size: 6rem;
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 15px;
 }
 p {
     margin-top: 0;
@@ -30,6 +30,9 @@ p {
     justify-content: space-evenly;
     align-items: center;
     margin-bottom: 10px;
+}
+input[type=text] {
+    padding: 5px 10px;
 }
 .title, .attr {
     width: 12,5%;
