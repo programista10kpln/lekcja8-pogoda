@@ -17,14 +17,14 @@ def home():
 
 @app.route('/forecast', methods=['POST', 'GET'])
 def get_weather():
-    # etap 1
+    # step 1
     input_city = request.form['city_name'].lower().capitalize()
     geo_url = "http://api.openweathermap.org/geo/1.0/direct"
 
     geo_querystring = {"q": input_city, "limit": "1", "appid": os.getenv('api_key')}
 
     geo_response = requests.request("GET", geo_url, params=geo_querystring)
-    # etap 2
+    # step 2
 
     try:
         lat = geo_response.json()[0]['lat']
@@ -45,4 +45,4 @@ def get_weather():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
